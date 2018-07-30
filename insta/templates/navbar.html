@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	
+<nav class="navbar navbar-expand-lg navbar-light fixed-top bg-light" style='margin-bottom:200px;'>
+	<div class='container'>
+	<i class=" navbar-brand fab fa-instagram" style='font-size:30px;color:black;border-right:solid grey 1px;padding-right:10px;'></i>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+
+	
+ <h1 class="nav-item title col-md-3"><a class='title'href='/' id="progress-bar-trigger"> Instagram</a></h1><form class="form-inline" >
+   <input class="form-control mr-sm-2 nav-item" style='padding-right:30px;width:120%'type="search" placeholder="Search" aria-label="Search"></form>
+   <div style='margin-left:200px;float:right;'>
+  <a href='/logout'> <i class="fab fa-wpexplorer nav-item" style='font-size:30px;color:black;padding-left:180px;m'></i></a>
+
+
+<a href="{% url "new-image" %}"><i class="far fa-heart" style='font-size:30px;color:black;padding-left:20px;'></i></a>
+
+<a href="{% url "current_profile" %}"><i class="far fa-user nav-item" style='font-size:30px;color:black;padding-left:20px;'></i></a>
+</div>
+</div>
+</div>
+</nav>
+</body>
+</html>

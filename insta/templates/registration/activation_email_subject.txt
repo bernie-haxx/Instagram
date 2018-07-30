@@ -1,0 +1,4 @@
+
+Hi {{ user.username }},
+Please click on the link to confirm your registration,with this key {{site}}/accounts/activate/{{activation_key}}/ within {{expiration_days}}
+{{site}}

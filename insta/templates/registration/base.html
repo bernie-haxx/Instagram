@@ -1,0 +1,39 @@
+{% load bootstrap4 %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  {% if title %}
+  <title>Instagram - {{title}}</title>
+  <link rel="icon" type="image/png" href="https://www.edigitalagency.com.au/wp-content/uploads/Instagram-logo-black-borders-png-transparent-background.png">
+  {% else %}
+    <title> Instagram </title>
+    <link rel="icon" type="image/png" href="https://www.edigitalagency.com.au/wp-content/uploads/Instagram-logo-black-borders-png-transparent-background.png" >
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  {% endif %}
+
+  {% block styles %}
+    {% bootstrap_css %}
+     <link rel="stylesheet" type="text/css"
+
+          href="{% static "css/style.css" %}">
+          <link rel="stylesheet" href="{% static "devices.min.css"%}" type="text/css">
+  {% endblock %}
+{% block scripts %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+     {% bootstrap_javascript %}
+    {% endblock %}
+</head>
+
+<body>
+	
+  {% block content %}  {%endblock%}
+
+
+  
+
+</body>
+
+</html>

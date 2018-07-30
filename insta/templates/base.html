@@ -1,0 +1,44 @@
+{% load bootstrap4 %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
+
+  {% if title %}
+  <title>Instagram - {{title}}</title>
+  <link rel="icon" type="image/png" href="https://www.edigitalagency.com.au/wp-content/uploads/Instagram-logo-black-borders-png-transparent-background.png">
+  {% else %}
+    <title> Instagram </title>
+    <link rel="icon" type="image/png" href="https://www.edigitalagency.com.au/wp-content/uploads/Instagram-logo-black-borders-png-transparent-background.png" >
+  {% endif %}
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
+
+
+  {% block styles %}
+    {% bootstrap_css %}
+     <link rel="stylesheet" type="text/css"
+
+          href="{% static "css/style.css" %}"/>
+          <link rel="stylesheet" href="{% static "css/devices.min.css"%}" type="text/css">
+          <link rel="stylesheet" href="{% static "css/grayscale.css"%}" type="text/css">
+          <link rel="stylesheet" href="{% static "css/grayscale.min.css"%}" type="text/css">
+  {% endblock %}
+{% block scripts %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ <script src="{% static 'js/script.js'%}"></script>
+
+     {% bootstrap_javascript %}
+
+    {% endblock %}
+</head>
+<div id="progress-bar" style="background-color: blue; width: 0%;">&nbsp;</div>
+	{% include 'navbar.html'%}
+    {% block content %}  
+
+
+    {%endblock%}
+</body>
+</html>

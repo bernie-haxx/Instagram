@@ -1,0 +1,57 @@
+{%extends "registration/base.html"%} 
+{% load bootstrap4 %}
+
+{% block content %}
+
+<div class="container-fluid" style='background-color:#FAFAFA;'>
+	<!-- empty div -->
+	<div class='row'>
+		<div class='col-md-2 col-xs-2 col-sm-2'>
+		</div>
+		<div class='col-md-4 col-xs-4 col-sm-4 phone'>
+			<div class='content'></div>
+        </div>
+        <div class='col-md-4 col-xs-4 col-sm-4'>
+        <div class="panel-body card register-card">
+        	<h2 class='header'>Instagram<h2>
+        	<h5 style='color:grey;text-align:center;font-size:15px;'><strong>Sign up to see photos<br>and videos from your friends</strong></h5>
+          <form  action="/accounts/register/" method="post">
+            	{%csrf_token%}
+            	{% for field in form %}
+            	<div class='fieldWrapper'>
+            		<h5 style='text-align:center;font-family"Roboto", sans-serif;font-size:14px;'>{{field.label}}</h5>
+
+            		<p style='width:100%;text-align:center;'>{{field}}</p>
+            		</div>
+       			 {% for error in field.errors %}
+         		 <p style="color: red">{{ error }}</p>
+        			{% endfor %}
+            	{% endfor %}
+            	
+              <input type="submit" class="btn btn-primary btn-sm" value="Sign Up" style='text-align:center;font-family"Roboto", sans-serif;font-size:14px;width:100%;margin-top:20px;'>
+              <h5 style='color:grey;text-align:center;font-size:15px;padding-top:20px;'>By signing up, you agree to our <strong><a href='https://help.instagram.com/581066165581870'style='color:grey'>Terms</a></strong>, <strong><a href='https://help.instagram.com/519522125107875'style='color:grey'>Data Policy</strong> and <strong><a href='https://www.instagram.com/legal/cookies/' style='color:grey'>Cookies Policy</strong></a></h5>
+            </form>
+
+            
+             
+		</div>
+		<div class='card login-card'>
+			<h1 style='text-align:center;font-family"Roboto", sans-serif;font-size:14px;width:100%;margin-top:20px;'>
+				If you have an account: </h1>
+			<a href='/accounts/login' style='text-align:center;font-family"Roboto", sans-serif;font-size:14px;width:100%;margin-top:20px;'>Sign In</a>
+            <input type="hidden" name="next" value="{{next}}">
+		</div>
+		<h1 style='text-align:center;font-family"Roboto", sans-serif;font-size:20px;width:80%;margin-top:20px;padding-left:20px;'>To get The App.</h1>
+		<div class='row' style='width:80%;text-align:center;margin-top:20px;'>
+			<div class='col-md-6'><a href='https://itunes.apple.com/app/instagram/id389801252?pt=428156&ct=igweb.signupPage.badge&mt=8&ig_mid=W1XKmgAEAAFsIBloqxUIka_rnLQ7'><img src='https://www.instagram.com/static/images/appstore-install-badges/badge_ios_english-en.png/180ae7a0bcf7.png' style='width:80%;float:right;'></a></div>
+			<div class='col-md-6'><a href='https://play.google.com/store/apps/details?id=com.instagram.android&referrer=utm_source%3Dinstagramweb%26utm_campaign%3DsignupPage%26ig_mid%3DW1XKmgAEAAFsIBloqxUIka_rnLQ7%26utm_medium%3Dbadge'><img src='https://www.instagram.com/static/images/appstore-install-badges/badge_android_english-en.png/e9cd846dc748.png' style='width:80%;margin-left:50px;'></a></div>
+	</div>
+		<div class='col-md-2 col-xs-2 col-sm-2'>
+		</div>
+		</div>
+
+   		
+   		
+    </div>
+
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends 'base.html'%}
+{% load static %}
+{% load bootstrap3 %}
+{% block content %}
+{% load columns %}
+<div class='container-fluid'>
+	<div class='row'>
+		<div class='col-md-2 col-xs-2 col-sm-2'>
+		</div>
+		<div class='col-md-6 col-xs-6 col-sm-6'>
+{% for image in images %}
+
+
+<div class='card' style='margin-top:100px;margin-bottom:100px;'>
+	<div><img src='{{image.user.profile.profilepicture.url}}' style='width:40px;height:40px;border-radius: 50%;float:left;margin:10px;'><div style='float:left;margin:10px;margin-top:20px;'><strong>{{image.user.username}}</strong></div></div>	
+<img src='{{image.image.url}}' class='img-responsive' style='width:100%;'>
+
+<form  action="{%url 'welcome' image_id=image.id%}" method="post">
+    {%csrf_token%}
+
+    {% bootstrap_form form layout='inline' %}
+    <input type="submit" value="Subscribe">
+  </form>
+</div>
+
+{% endfor %}
+{% for image in imagess %}
+
+
+<div class='card' style='margin-top:100px;margin-bottom:100px;'>
+	<div><img src='{{image.user.profile.profilepicture.url}}' style='width:40px;height:40px;border-radius: 50%;float:left;margin:10px;'><div style='float:left;margin:10px;margin-top:20px;'><strong>{{image.user.username}}</strong></div></div>	
+<img src='{{image.image.url}}' class='img-responsive' style='width:100%;'>
+
+<form  action="{%url 'welcome' image_id=image.id%}" method="post">
+    {%csrf_token%}
+
+    {% bootstrap_form form layout='inline' %}
+    <input type="submit" value="Comment">
+  </form>
+</div>
+
+{% endfor %}
+
+</div>
+<div class='col-md-2 col-xs-2 col-sm-2' style='position:fixed;right:200px;margin-top:100px;'><img src='{{user.profile.profilepicture.url}}' style='width:40px;height:40px;border-radius: 50%;float:left;margin:10px;'><div style='float:left;margin:10px;margin-top:20px;padding-bottom:20px;margin-bottom:50px;'><strong>{{user.username}}</strong></div><br><div style='height: 300px;
+    width: 200px;
+    overflow-y: scroll;margin-left:40px;'>
+
+    {% for discover in discovers %}
+    {% if request.user == discover.user %}
+    <div>
+</div>
+    {% else %}
+    <a href='{% url "other_profile" others_user=discover.user.id %}'>{{discover.user.username}}</a>
+
+    {% if discover.user in following %}
+   
+   <button style='width:50px;height:35px;'><a href='{% url "unfollow" other_user=discover.user.id %}' class='edit'>Unfollow</a></button>  
+
+    {%else%}
+  
+        <button style='width:50px;height:35px;'><a href='{% url "follow" other_user=discover.user.id %}' class='edit'>Follow</a></button>
+	{%endif%}
+    {%endif%}
+    <br>{% endfor %}</div>
+<div class='col-md-2 col-xs-2 col-sm-2'></div>
+</div>
+</div>
+{% endblock%}

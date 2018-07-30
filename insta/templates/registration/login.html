@@ -1,0 +1,49 @@
+{%extends "registration/base.html"%}
+{% load bootstrap4 %}
+{% block content %}
+<div class="container-fluid" style='background-color:#FAFAFA;'>
+  <div class="row">
+    <!-- Empty div -->
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      {% if form.errors %}
+        <p> Password or Username is incorrect </p>
+      {% endif %}
+   <div class="panel-body card register-card">
+        	<h2 class='header'>Instagram<h2>
+        	<h5 style='color:grey;text-align:center;font-size:15px;'><strong>Sign in to see photos<br>and videos from your friends</strong></h5>
+          <form  action="/accounts/login/" method="post">
+            	{%csrf_token%}
+            	{% for field in form %}
+            	<div class='fieldWrapper'>
+            		<h5 style='text-align:center;font-family"Roboto", sans-serif;font-size:14px;'>{{field.label}}</h5>
+
+            		<p style='width:100%;text-align:center;'>{{field}}</p>
+            		</div>
+       			 {% for error in field.errors %}
+         		 <p style="color: red">{{ error }}</p>
+        			{% endfor %}
+            	{% endfor %}
+            	{% if user.is_authenticated%}
+              <input type='hidden' name='next' value='/'>
+              {%endif%}
+              
+              <input type="submit" class="btn btn-primary btn-sm"  value='/ Login ' style='text-align:center;font-family"Roboto", sans-serif;font-size:14px;width:100%;margin-top:20px;'>
+
+            </form>
+
+            
+             
+		</div>
+		<h1 style='text-align:center;font-family"Roboto", sans-serif;font-size:20px;width:80%;margin-top:20px;padding-left:20px;'>To get The App.</h1>
+		<div class='row' style='width:80%;text-align:center;margin-top:20px;'>
+		<div class='col-md-6'><a href='https://itunes.apple.com/app/instagram/id389801252?pt=428156&ct=igweb.signupPage.badge&mt=8&ig_mid=W1XKmgAEAAFsIBloqxUIka_rnLQ7'><img src='https://www.instagram.com/static/images/appstore-install-badges/badge_ios_english-en.png/180ae7a0bcf7.png' style='width:80%;'></a></div>
+			<div class='col-md-6'><a href='https://play.google.com/store/apps/details?id=com.instagram.android&referrer=utm_source%3Dinstagramweb%26utm_campaign%3DsignupPage%26ig_mid%3DW1XKmgAEAAFsIBloqxUIka_rnLQ7%26utm_medium%3Dbadge'><img src='https://www.instagram.com/static/images/appstore-install-badges/badge_android_english-en.png/e9cd846dc748.png' style='width:80%;margin-left:50px;'></a></div>
+	</div>
+    </div>
+    <!-- empty div -->
+    <div class="col-md-4"></div>
+  </div>
+</div>
+
+{% endblock %}
