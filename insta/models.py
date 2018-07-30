@@ -21,3 +21,13 @@ class UserProfile(models.Model):
 
 class Tags(models.Model):
 	name = models.CharField(max_length=60,default="")
+class Image(models.Model):
+	image=models.ImageField(upload_to='images/', blank=True)
+	user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE,related_name="red")
+	title = models.CharField(max_length=60, null=True)
+	time_created = models.DateTimeField(auto_now=True, auto_now_add=False)
+	time_updated = models.DateTimeField(auto_now=False, auto_now_add=True)
+	date_uploaded = models.DateTimeField(auto_now=True)
+	likes = models.IntegerField(default=0)
+	caption = models.CharField(max_length=140, default="")
+	tags = models.ManyToManyField(Tags,related_name="tags",blank=True)
