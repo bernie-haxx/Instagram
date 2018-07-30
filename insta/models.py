@@ -30,7 +30,7 @@ class Image(models.Model):
 	date_uploaded = models.DateTimeField(auto_now=True)
 	likes = models.IntegerField(default=0)
 	caption = models.CharField(max_length=140, default="")
-	tags = models.ManyToManyField(Tags,related_name="tags",blank=True)	tags = models.ManyToManyField(Tags,related_name="tags",blank=True)
+	tags = models.ManyToManyField(Tags,related_name="tags",blank=True)
 
 	@property
 	def get_comments(self):
@@ -41,3 +41,4 @@ class Comments(models.Model):
 	user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE,related_name='user')
 	comments = models.TextField()
 	date_posted = models.DateTimeField(auto_now=True)
+	image=models.ForeignKey(Image, on_delete=models.CASCADE,related_name="comments")
