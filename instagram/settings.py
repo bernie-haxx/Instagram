@@ -87,7 +87,7 @@ WSGI_APPLICATION = 'instagram.wsgi.application'
 
 MODE=config("MODE", default="dev")
 SECRET_KEY = config('SECRET_KEY')
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = config('DEBUG', default=True, cast=bool)
 # development
 if config('MODE')=="dev":
    DATABASES = {
@@ -162,5 +162,5 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD =config('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587
 ACCOUNT_ACTIVATION_DAYS = 7
-SITE_ID = 6
+SITE_ID = 4
 django_heroku.settings(locals())
