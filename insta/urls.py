@@ -5,6 +5,7 @@ from django.conf.urls.static import static
 urlpatterns=[
 url(r'^(?P<image_id>\d+)?$',views.home,name = 'welcome'),
 url(r'^follow/(?P<other_user>\d+)',views.follow_function,name='follow'),
+url(r'^like/(?P<image_id>\d+)',views.like,name='like'),
 url(r'^unfollow/(?P<other_user>\d+)',views.unfollow_function,name='unfollow'),
 url(r'^profile/(?P<user>\d+)',views.profile,name='profile'),
 url(r'^profile/$',views.userprofile,name='current_profile'),
