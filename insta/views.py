@@ -1,23 +1,26 @@
-from django.shortcuts import render,redirect,get_object_or_404
+from django.shortcuts import render,redirect,get_object_or_404,render_to_response
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from friendship.models import Follow
+from django.contrib import messages
 from .models import UserProfile,Tags,Image,Comments
 from .forms import NewProfileForm,NewCommentForm,NewImageForm
-from django.http import HttpResponse
+from django.http import HttpResponse,JsonResponse
 # Create your views here.
 @login_required(login_url='/accounts/register/')
 def home(request,image_id=None):
 	title='Home'
 	discovers=UserProfile.objects.all()
+	comments=Comments.objects.all()
 	following=Follow.objects.following(request.user)
 	images=Image.objects.all()
+	message='Liking is by clicking on the picture'
 	if image_id:
 		image = get_object_or_404(Image, pk=image_id)
 	images=[]
 	for i in Follow.objects.following(request.user):
 		images+=i.red.all()
-	imagess=[]	
+	imagess=[]
 	for b in Follow.objects.followers(request.user):
 		imagess+=b.red.all()
 	form = NewCommentForm()
@@ -34,6 +37,7 @@ def home(request,image_id=None):
 	else:
 			form = NewCommentForm()
 
+	return render_to_response('home.html',locals())
 	return render(request,'home.html',locals())
 
 
@@ -46,13 +50,13 @@ def profile(request,user):
 
 	return render(request,'profile.html',locals())
 
-@login_required(login_url='/accounts/login')	
+@login_required(login_url='/accounts/login')
 def follow_function(request,other_user):
 	other_users=User.objects.get(id=other_user)
 	addfollow=Follow.objects.add_follower(request.user, other_users)
 	return redirect('welcome')
 
-@login_required(login_url='/accounts/login')	
+@login_required(login_url='/accounts/login')
 def unfollow_function(request,other_user):
 	other_users=User.objects.get(id=other_user)
 	unfollow=Follow.objects.remove_follower(request.user, other_users)
@@ -64,6 +68,7 @@ def userprofile(request):
 	following=len(Follow.objects.following(request.user))
 	image_count=len(Image.objects.filter(user_id=request.user.id))
 	images=Image.objects.filter(user_id=request.user.id)
+	message='Liking is by clicking on the picture'
 	return render(request,'profile.html',locals())
 
 @login_required(login_url='/accounts/login')
@@ -82,11 +87,11 @@ def new_profile(request):
 		form = NewProfileForm(request.POST,request.FILES, instance=request.user.profile)
 		if form.is_valid():
 			form.save()
-			return redirect('current_profile')	
+			return redirect('current_profile')
 
 	else:
 			form = NewProfileForm()
-	return render(request, 'new_profile.html',{"form":form })		
+	return render(request, 'new_profile.html',{"form":form })
 
 @login_required(login_url='/accounts/login')
 def new_image(request):
@@ -100,8 +105,13 @@ def new_image(request):
 			return redirect('current_profile')
 	else:
 			form = NewImageForm()
-	return render(request, 'new_image.html',{"form":form })		
-
-	
+	return render(request, 'new_image.html',{"form":form })
 
 
+
+
+@login_required(login_url='/accounts/login/')
+def like(request, image_id):
+	post = get_object_or_404(Image, pk=image_id)
+	request.user.profile.like(post)
+	return redirect('welcome')
