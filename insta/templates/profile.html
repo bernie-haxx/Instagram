@@ -36,6 +36,9 @@ ul li {
     padding-left:60px;
 }
 </style>
+<script>
+    alert('{{ message }}');
+</script>
 <div class='container-fluid'>
 	<div class='row' style='margin-top:100px;'>
 <div class='col-md-2 col-xs-2 col-sm-2'><h1></h1>    </div>
@@ -45,8 +48,8 @@ ul li {
 	<h1 style="text-align:center;
 	    font-size: 50px;
     line-height: 40px;
-    font-weight: 200;float:left;padding-left:100px;padding-right:40px;font-family: BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"><strong>{{user.username}}</strong></h1> 
-    
+    font-weight: 200;float:left;padding-left:100px;padding-right:40px;font-family: BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"><strong>{{user.username}}</strong></h1>
+
 	<button style='width:50px;height:35px;'><a href='{% url "new-profile"%}' class='edit'>Edit</a></button></div>
 	<br>
 <div class='foll row'>
