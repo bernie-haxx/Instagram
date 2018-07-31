@@ -3,33 +3,44 @@
 {% load bootstrap3 %}
 {% block content %}
 {% load columns %}
+<script>
+    alert('{{ message }}');
+</script>
 <div class='container-fluid'>
+
 	<div class='row'>
 		<div class='col-md-2 col-xs-2 col-sm-2'>
 		</div>
 		<div class='col-md-6 col-xs-6 col-sm-6'>
-{% for image in images %}
 
+			</ul>
+			
+			{% for image in images %}
 
 <div class='card' style='margin-top:100px;margin-bottom:100px;'>
-	<div><img src='{{image.user.profile.profilepicture.url}}' style='width:40px;height:40px;border-radius: 50%;float:left;margin:10px;'><div style='float:left;margin:10px;margin-top:20px;'><strong>{{image.user.username}}</strong></div></div>	
-<img src='{{image.image.url}}' class='img-responsive' style='width:100%;'>
+	<div><img src='{{image.user.profile.profilepicture.url}}' style='width:40px;height:40px;border-radius: 50%;float:left;margin:10px;'><div style='float:left;margin:10px;margin-top:20px;'><strong>{{image.user.username}}</strong></div></div>
+<a href='{% url "like" image_id=image.id %}'><img src='{{image.image.url}}' class='img-responsive' style='width:100%;'></a>
+{% if image.photolikes.count == 1 %}
+<h5><span class="#likespan">{{image.photolikes.count}}</span>Like</h5>
+{% elif image.photolikes.count == 0 %}
+<h5><span class="#likespan">{{image.photolikes.count}}</span>Like</h5>
+{%else%}
+<h5><span class="#likespan">{{image.photolikes.count}}</span>Likes</h5>
 
-<form  action="{%url 'welcome' image_id=image.id%}" method="post">
-    {%csrf_token%}
+{%endif%}
 
-    {% bootstrap_form form layout='inline' %}
-    <input type="submit" value="Subscribe">
-  </form>
+
+{% for comment in comments %}
+{% if comment.image.id == image.id %}
+<div>
+<img src='{{comment.user.profile.profilepicture.url}}' style='width:40px;height:40px;border-radius: 50%;float:left;margin:10px;float:left'>
+<strong style='float:left;'>{{comment.user.username}}</strong>
+
+<div style='float:right;margin-right:70px;'>{{comment.comments}}</div>
 </div>
-
+{% endif %}
 {% endfor %}
-{% for image in imagess %}
 
-
-<div class='card' style='margin-top:100px;margin-bottom:100px;'>
-	<div><img src='{{image.user.profile.profilepicture.url}}' style='width:40px;height:40px;border-radius: 50%;float:left;margin:10px;'><div style='float:left;margin:10px;margin-top:20px;'><strong>{{image.user.username}}</strong></div></div>	
-<img src='{{image.image.url}}' class='img-responsive' style='width:100%;'>
 
 <form  action="{%url 'welcome' image_id=image.id%}" method="post">
     {%csrf_token%}
@@ -41,8 +52,12 @@
 
 {% endfor %}
 
+
 </div>
-<div class='col-md-2 col-xs-2 col-sm-2' style='position:fixed;right:200px;margin-top:100px;'><img src='{{user.profile.profilepicture.url}}' style='width:40px;height:40px;border-radius: 50%;float:left;margin:10px;'><div style='float:left;margin:10px;margin-top:20px;padding-bottom:20px;margin-bottom:50px;'><strong>{{user.username}}</strong></div><br><div style='height: 300px;
+
+<div class='col-md-2 col-xs-2 col-sm-2' style='position:fixed;right:200px;margin-top:100px;'><img src='{{user.profile.profilepicture.url}}' style='width:40px;height:40px;border-radius: 50%;float:left;margin:10px;'><div style='float:left;margin:10px;margin-top:20px;padding-bottom:20px;margin-bottom:50px;'><strong>{{user.username}}</strong></div><br>
+<h3 class='header'>People In The App</h3>
+<div style='height: 300px;
     width: 200px;
     overflow-y: scroll;margin-left:40px;'>
 
@@ -51,17 +66,20 @@
     <div>
 </div>
     {% else %}
+		<div>
+
     <a href='{% url "other_profile" others_user=discover.user.id %}'>{{discover.user.username}}</a>
 
     {% if discover.user in following %}
-   
-   <button style='width:50px;height:35px;'><a href='{% url "unfollow" other_user=discover.user.id %}' class='edit'>Unfollow</a></button>  
+
+   <button style='margin-left: 10px;width:72px;height:35px;'><a href='{% url "unfollow" other_user=discover.user.id %}' class='edit'>Unfollow</a></button>
 
     {%else%}
-  
-        <button style='width:50px;height:35px;'><a href='{% url "follow" other_user=discover.user.id %}' class='edit'>Follow</a></button>
+
+        <button style='width:100px;height:35px;'><a href='{% url "follow" other_user=discover.user.id %}' class='edit'>Follow</a></button>
 	{%endif%}
     {%endif%}
+	</div>
     <br>{% endfor %}</div>
 <div class='col-md-2 col-xs-2 col-sm-2'></div>
 </div>
