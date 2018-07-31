@@ -40,10 +40,14 @@ class Image(models.Model):
 	@property
 	def get_comments(self):
 		return self.comments.all()
-	
+
 
 class Comments(models.Model):
 	user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE,related_name='user')
 	comments = models.TextField()
 	date_posted = models.DateTimeField(auto_now=True)
 	image=models.ForeignKey(Image, on_delete=models.CASCADE,related_name="comments")
+
+class Likes(models.Model):
+	user = models.ForeignKey(UserProfile, related_name='mylikes')
+	photo = models.ForeignKey(Image, related_name='photolikes')
