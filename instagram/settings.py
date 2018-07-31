@@ -13,6 +13,8 @@ import os
 import django_heroku
 import dj_database_url
 from decouple import config,Csv
+import socket
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -112,7 +114,12 @@ else:
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
+if socket.gethostname() == "server_name":
+    DEBUG = False
+    ALLOWED_HOSTS = ["myinstagramcloner.herokuapp.com",]
+else:
+    DEBUG = True
+    ALLOWED_HOSTS = ["localhost", "127.0.0.1",]
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
