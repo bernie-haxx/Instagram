@@ -19,6 +19,11 @@ class UserProfile(models.Model):
 	def save_user_profile(sender, instance, **kwargs):
 		instance.profile.save()
 
+
+	def like(self, photo):
+		if self.mylikes.filter(photo=photo).count() == 0:
+			Likes(photo=photo,user=self).save()
+
 class Tags(models.Model):
 	name = models.CharField(max_length=60,default="")
 class Image(models.Model):
