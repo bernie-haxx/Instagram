@@ -42,10 +42,10 @@
 {% endfor %}
 
 
-<form  action="{%url 'welcome' image_id=image.id%}" method="post">
-   
- {%csrf_token%}
+<form  action="{%url 'welcome' image_id=image.id%}" method="post"> {% csrf_token %}
+
     {% bootstrap_form form layout='inline' %}
+    
     <input type="submit" value="Comment">
   </form>
 </div>
@@ -55,7 +55,7 @@
 
 </div>
 
-<div class='col-md-2 col-xs-2 col-sm-2' style='position:fixed;right:200px;margin-top:100px;'><img src='{{user.profile.profilepicture.url}}' style='width:40px;height:40px;border-radius: 50%;float:left;margin:10px;'><div style='float:left;margin:10px;margin-top:20px;padding-bottom:20px;margin-bottom:50px;'><strong>{{user.username}}</strong></div><br>
+<div class='col-md-2 col-xs-2 col-sm-2' style='position:fixed;right:200px;margin-top:100px;'><img src='{{request.user.profile.profilepicture.url}}' style='width:40px;height:40px;border-radius: 50%;float:left;margin:10px;'><div style='float:left;margin:10px;margin-top:20px;padding-bottom:20px;margin-bottom:50px;'><strong>{{request.user.username}}</strong></div><br>
 <h3 class='header'>People In The App</h3>
 <div style='height: 300px;
     width: 200px;
