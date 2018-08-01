@@ -10,6 +10,13 @@ class UserProfile(models.Model):
 	profilepicture = models.ImageField(upload_to='images/', blank=True,default="/jVr43h8.png")
 	secondary_email = models.CharField(max_length=100, null=True, blank=True)
 
+	def __str__(self):
+		return self.user
+	class Meta:
+		ordering = ['user']
+	def save_user(self):
+		self.save()	
+
 	@receiver(post_save, sender=User)
 	def create_user_profile(sender, instance, created, **kwargs):
 		if created:
@@ -26,6 +33,15 @@ class UserProfile(models.Model):
 
 class Tags(models.Model):
 	name = models.CharField(max_length=60,default="")
+
+	def __str__(self):
+		return self.name
+	class Meta:
+		ordering = ['name']
+	def save_tags(self):
+		self.save()	
+
+
 class Image(models.Model):
 	image=models.ImageField(upload_to='images/', blank=True)
 	user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE,related_name="red")
@@ -37,6 +53,17 @@ class Image(models.Model):
 	caption = models.CharField(max_length=140, default="")
 	tags = models.ManyToManyField(Tags,related_name="tags",blank=True)
 
+	def __str__(self):
+		return self.title
+	class Meta:
+		ordering = ['title']
+	def save_Image(self):
+		self.save()	
+
+	@classmethod
+	def search_by_title(cls,search_term):
+		image = cls.objects.filter(title__icontains=search_term)
+		return image
 	@property
 	def get_comments(self):
 		return self.comments.all()
