@@ -16,8 +16,8 @@
 <div class="collapse navbar-collapse" id="navbarNav">
 
 
- <h1 class="nav-item title col-md-3"><a class='title'href='/' id="progress-bar-trigger"> Instagram</a></h1><form class="form-inline" >
-   <input class="form-control mr-sm-2 nav-item" style='padding-right:30px;width:120%'type="search" placeholder="Search" aria-label="Search"></form>
+ <h1 class="nav-item title col-md-3"><a class='title'href='/' id="progress-bar-trigger"> Instagram</a></h1><form class="form-inline" action='{% url "search_results" %}' >
+   <input class="form-control mr-sm-2 nav-item" style='padding-right:30px;width:120%'type="search" placeholder="Search Image.." aria-label="Search" name=title></form>
    <div style='margin-left:150px;float:right;'>
   <a href='/'> <i class="fab fa-wpexplorer nav-item" style='font-size:30px;color:black;padding-left:180px;m'></i></a>
 
