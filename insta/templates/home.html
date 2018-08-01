@@ -42,10 +42,11 @@
 {% endfor %}
 
 
-<form  action="{%url 'welcome' image_id=image.id%}" method="post"> {% csrf_token %}
+<form  action="{%url 'welcome' image_id=image.id%}" method="post">
+	 {% csrf_token %}
 
     {% bootstrap_form form layout='inline' %}
-    
+
     <input type="submit" value="Comment">
   </form>
 </div>
