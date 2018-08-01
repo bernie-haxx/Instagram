@@ -115,3 +115,14 @@ def like(request, image_id):
 	post = get_object_or_404(Image, pk=image_id)
 	request.user.profile.like(post)
 	return redirect('welcome')
+
+
+def search_results(request):
+	if 'title' in request.GET and request.GET["title"]:
+		search_term = request.GET.get("title")
+		searched_images = Image.search_by_title(search_term)
+		message = f"{search_term}"
+		return render(request,'search.html',{"message":message,"images":searched_images})
+	else:
+		message='You havent searched for any term'
+		return render(request, 'search.html',locals())		
