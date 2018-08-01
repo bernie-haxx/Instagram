@@ -12,6 +12,7 @@ url(r'^profile/$',views.userprofile,name='current_profile'),
 url(r'^otherprofile/(?P<others_user>\d+)$',views.otherprofile,name='other_profile'),
 url(r'^new/profile$',views.new_profile,name='new-profile'),
 url(r'^new/image$',views.new_image,name='new-image'),
+url(r'^search/',views.search_results,name='search_results'),
 ]
 if settings.DEBUG:
 	urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
